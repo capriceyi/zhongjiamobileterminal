@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电竞沙发展示</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,"> 
+</head>
+<body>
+    <!-- 沙发选择界面 -->
+    <div id="sofa-selection" class="page active">
+        <h1>选择电竞沙发</h1>
+        <div class="sofa-list">
+            <!-- 沙发列表 -->
+            <div class="sofa-item" data-index="0">
+                <img src="thumbnails/sofa1.jpg" alt="Sofa 1">
+                <p>Sofa 1</p>
+            </div>
+            <div class="sofa-item" data-index="1">
+                <img src="thumbnails/sofa2.jpg" alt="Sofa 2">
+                <p>Sofa 2</p>
+            </div>
+            <div class="sofa-item" data-index="2">
+                <img src="thumbnails/sofa3.jpg" alt="Sofa 3">
+                <p>Sofa 3</p>
+            </div>
+            <div class="sofa-item" data-index="3">
+                <img src="thumbnails/sofa4.jpg" alt="Sofa 4">
+                <p>Sofa 4</p>
+            </div>
+            <div class="sofa-item" data-index="4">
+                <img src="thumbnails/sofa5.jpg" alt="Sofa 5">
+                <p>Sofa 5</p>
+            </div>
+            <div class="sofa-item" data-index="5">
+                <img src="thumbnails/sofa6.jpg" alt="Sofa 6">
+                <p>Sofa 6</p>
+            </div>
+            <!-- 继续添加更多沙发项目 -->
+        </div>
+    </div>
+
+    <!-- 颜色选择界面 -->
+    <div id="color-selection" class="page">
+        <div id="back-button">← 返回</div> <!-- 返回按钮仅在此界面 -->
+        <div id="left-panel">
+            <h2 id="sofa-name" class="sofa-name-center"></h2>
+            <canvas id="canvas"></canvas>
+        </div>
+        <div id="right-panel">
+            <h3>主色选择</h3>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('main-colors-248')">无溶剂248系列 ▼</h4>
+                <div id="main-colors-248" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('main-colors-s600')">无溶剂S600系列 ▼</h4>
+                <div id="main-colors-s600" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('main-colors-w00')">无溶剂W00系列 ▼</h4>
+                <div id="main-colors-w00" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+
+            <h3>配色选择</h3>
+                <!-- 添加 accent 和 accent1 的交互按钮 -->
+            <div class="accent-selector">
+            <div class="accent-button" onclick="selectAccent('accent')">accent</div>
+             <div class="accent-button" onclick="selectAccent('accent1')">accent1</div>
+             </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('accent-colors-p248')">P248系列 ▼</h4>
+                <div id="accent-colors-p248" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('accent-colors-ps600')">PS600系列 ▼</h4>
+                <div id="accent-colors-ps600" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('accent-colors-pw00')">PW00系列 ▼</h4>
+                <div id="accent-colors-pw00" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+            <div class="color-series">
+                <h4 class="series-header" onclick="toggleSeries('accent-colors-napa')">纳帕皮系列 ▼</h4>
+                <div id="accent-colors-napa" class="color-scroll-container" style="display: none;">
+                    <!-- 动态添加颜色选择项 -->
+                </div>
+            </div>
+        <!-- 在配色选择下方添加拉手选择 -->
+            <div class="color-series">
+                <h4 class="series-header">拉手选择</h4>
+                    <div class="handle-selector">
+                 <div class="handle-option" onclick="selectHandle('Golden')">
+                <img src="thumbnails/golden-handle.jpg" alt="Golden Handle">
+                    <p>Golden</p>
+                 </div>
+                <div class="handle-option" onclick="selectHandle('Silver')">
+                 <img src="thumbnails/silver-handle.jpg" alt="Silver Handle">
+            <p>Silver</p>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <div id="loading-indicator" style="display: none;">加载中...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.7.3/umd/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/RGBELoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/pmrem/PMREMGenerator.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/lights/RectAreaLightUniformsLib.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/helpers/RectAreaLightHelper.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -65,12 +65,12 @@ function initThreeJS() {
     controls.screenSpacePanning = false;
     controls.minDistance = 8;    // 增加最小缩放距离
     controls.maxDistance = 60;   // 增加最大缩放距离
-    controls.maxPolarAngle = Math.PI / 1.8; // 允许更大的俯视角度
+    controls.maxPolarAngle = Math.PI / 2; // 允许更大的俯视角度
 
     // 移动端特定设置
     if ('ontouchstart' in window) {
     controls.enablePan = false; // 禁用平移
-    controls.maxPolarAngle = Math.PI / 1.6; // 限制垂直旋转角度
+    controls.maxPolarAngle = Math.PI / 2; // 限制垂直旋转角度
     controls.minDistance = 10; // 最小缩放距离
     controls.maxDistance = 50; // 最大缩放距离
     }

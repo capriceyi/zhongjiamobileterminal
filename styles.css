@@ -1,0 +1,619 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+}
+
+.page {
+    display: none;
+    position: absolute; /* 绝对定位避免重叠 */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #f0f0f0; /* 与主界面背景一致 */
+}
+
+.page.active {
+    display: block;
+}
+
+/* 修改标题为绝对定位居中 */
+#sofa-selection {
+    padding: 20px;
+    text-align: center;
+    position: relative; /* 添加相对定位 */
+}
+
+#sofa-selection h1 {
+    position: absolute; /* 绝对定位 */
+    left: 50%; /* 水平居中 */
+    top: 20px; /* 距离顶部固定间距 */
+    transform: translateX(-50%); /* 精确居中 */
+    margin: 0; /* 清除默认外边距 */
+    z-index: 1; /* 确保标题在图片上方 */
+}
+
+/* 调整图片列表的上边距避免与标题重叠 */
+.sofa-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px; /* 间距放大 20% (原10px → 12px) */
+    justify-content: center;
+    margin-top: 60px; /* 为标题留出空间 */
+}
+
+.sofa-item {
+    width: calc(20% - 12px); /* 调整宽度计算方式 */
+    text-align: center;
+    cursor: pointer;
+}
+
+/* 保持图片缩小10% */
+.sofa-item img {
+    width: 85%;
+    height: auto;
+    border: 2px solid transparent;
+}
+.sofa-item:hover img {
+    border-color: #007bff;
+}
+
+#color-selection {
+    display: flex;
+    height: 100vh;
+}
+
+/* 颜色选择界面的标题和返回按钮布局 */
+#left-panel {
+    flex: 2;
+    position: relative;
+    background: #f0f0f0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 改为垂直布局 */
+    align-items: center; /* 水平居中 */
+    justify-content: flex-start; /* 内容从顶部开始排列 */
+}
+
+#sofa-name {
+    text-align: center;
+    margin: 0; /* 清除默认外边距 */
+    font-size: 24px; /* 调整字体大小 */
+    margin-bottom: 20px; /* 与模型之间的间距 */
+    width: 100%; /* 占据整个宽度 */
+}
+
+#back-button {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute; /* 绝对定位 */
+    left: 20px; /* 固定在左侧 */
+    top: 20px; /* 距离顶部固定间距 */
+    z-index: 10;
+}
+
+canvas {
+    display: block; /* 保证canvas是一个块 */
+    margin: 0 auto; /* 中心对齐 */
+    width: 100%; /* 确保canvas占满左侧面板 */
+    height: calc(100% - 60px); /* 减去标题和间距的高度 */
+}
+
+
+/* 为每个系列添加灰色背景 */
+.color-series {
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* 浅灰色背景 */
+    padding: 15px; /* 内边距 */
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+}
+
+.series-header {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 18px; /* 调整系列标题字体大小 */
+    color: #333; /* 深灰色文字 */
+}
+
+
+#right-panel {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    height: 100vh; /* 限制高度 */
+    position: relative; /* 粘性定位的参考容器 */
+}
+
+#back-button {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+canvas {
+    display: block; /* 保证canvas是一个块 */
+    margin: 0 auto; /* 中心对齐 */
+    width: 100%; /* 确保canvas占满左侧面板 */
+    height: calc(100% - 60px); /* 减去标题和间距的高度 */
+    background-color: #cccccc; /* 设置Canvas背景为灰色 */
+}
+
+.color-series {
+    margin-bottom: 20px;
+}
+
+.color-scroll-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-height: 200px; /* 限制高度，允许滚动 */
+    overflow-y: auto;
+}
+
+/* 基础颜色选项样式 - 统一设置 */
+.color-option {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* 选中状态 - 统一应用于所有颜色选项 */
+.color-option.selected {
+    border: 3px solid #007bff !important;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5) !important;
+}
+
+.texture-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    font-size: 12px;
+}
+
+.sofa-name-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.series-header {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+/* accent 和 accent1 的交互按钮样式 */
+.accent-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.accent-button {
+    padding: 10px 20px;
+    background-color: #f0f0f0; /* 浅灰色背景 */
+    border-radius: 8px; /* 圆角 */
+    cursor: pointer;
+    font-size: 14px;
+    color: #333; /* 深灰色文字 */
+    transition: background-color 0.3s ease;
+}
+
+.accent-button:hover {
+    background-color: #ddd; /* 鼠标悬停时背景变深 */
+}
+
+.accent-button.active {
+    background-color: #007bff; /* 选中时背景变蓝色 */
+    color: white; /* 选中时文字变白色 */
+}
+
+/* 拉手选择区域样式 */
+.handle-selector {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.handle-option {
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    background-color: #fff; /* 白色背景 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+}
+
+.handle-option:hover {
+    border-color: #007bff;
+}
+
+.handle-option.selected {
+    border: 3px solid #007bff; /* 选中时的边框 */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* 选中时的阴影 */
+}
+
+.handle-option img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.handle-option p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+.handle-option.selected {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.handle-option img {
+    transition: transform 0.3s ease;
+}
+
+.handle-option:hover img {
+    transform: scale(1.1);
+}
+/* 当前选择的颜色区域样式 */
+#current-colors {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center; /* 添加文本居中 */
+    width: 100%; /* 确保宽度占满父容器 */
+}
+
+#current-colors h3 {
+    margin-bottom: 10px;
+}
+
+/* 颜色显示容器，设置为横排并居中 */
+.color-display-container {
+    display: flex;
+    justify-content: center; /* 将内容居中 */
+    gap: 30px;
+    margin: 0 auto; /* 自动外边距实现水平居中 */
+    width: auto; /* 宽度自适应内容 */
+}
+
+.color-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-name {
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+
+/* 在styles.css中添加以下样式 */
+#loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.loading-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* 更新进度条样式 */
+.progress-container {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    /* 使用CSS渐变实现从红到绿的色彩变化 */
+    background: linear-gradient(90deg, 
+        #c8d1ff 0%, 
+        #9dadfd 20%, 
+        #748bff 40%, 
+        #5370ff 60%, 
+        #3053ff 80%, 
+        #002aff 100%);
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+/* 添加进度百分比显示在进度条上 */
+.progress-bar::after {
+    content: attr(data-progress);
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 2px #fff;
+}
+
+/* 修改移动端适配部分 */
+@media (max-width: 768px) {
+    #color-selection {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #left-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 300px;
+        z-index: 100;
+        background: #f0f0f0;
+        padding: 40px 20px 0;
+    }
+
+        /* 新增这部分保持canvas比例 */
+        canvas {
+            width: 100% !important;
+            height: 260px !important;
+            object-fit: contain; /* 保持原始比例 */
+            margin: 0 auto;
+            display: block;
+        }
+
+     /* 调整模型容器以保持比例 */
+    #left-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #right-panel {
+        margin-top: 340px; /* 留出固定区域的高度+间距 */
+        height: calc(100vh - 340px);
+        overflow-y: auto;
+        padding-top: 0;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #sofa-name {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 110;
+        font-size: 18px;
+        background: rgba(255,255,255,0.9);
+        padding: 5px 15px;
+        border-radius: 20px;
+    }
+
+    #back-button {
+        z-index: 120; /* 确保在最上层 */
+    }
+
+    canvas {
+        height: 260px !important; /* 调整canvas实际显示高度 */
+        margin-top: 10px;
+    }
+    
+    /* 调整沙发选择列表 */
+    .sofa-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .sofa-item {
+        width: 80%;
+        margin-bottom: 15px;
+    }
+    
+    /* 调整颜色选择区域 */
+    .color-scroll-container {
+        max-height: 150px;
+    }
+    
+    .color-option {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* 调整当前颜色显示区域 */
+    .color-display-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* 调整标题大小 */
+    h1, h2, h3, h4 {
+        font-size: 1.2em;
+    }
+    
+    /* 调整按钮大小 */
+    .accent-button, .handle-option {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    /* 调整拉手选择区域 */
+    .handle-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .handle-option img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* 修改当前颜色区域和拉手选择区域的布局 */
+#right-panel > .color-series:last-child { /* 针对拉手选择容器 */
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* 调整布局结构 */
+#right-panel > .color-series:last-child > .handle-selector {
+    flex: 1;
+}
+
+/* 当前颜色区域调整 */
+#current-colors {
+    flex: 1;
+    position: static; /* 移除粘性定位 */
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    #right-panel > .color-series:last-child {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* 组合容器基础样式 */
+.combined-section {
+    display: flex;
+    flex-direction: column; /* 改为纵向排列 */
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+/* 当前颜色区域 */
+#current-colors {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* 拉手选择区域 */
+.handle-section {
+    width: 100%;
+}
+
+/* 拉手选项间距调整 */
+.handle-option {
+    margin: 0 5px;
+    flex-shrink: 0; /* 防止缩小 */
+}
+
+/* 移动端标题间距优化 */
+@media (max-width: 768px) {
+    #current-colors h3,
+    .handle-section h4 {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+}
+    
+    /* 调整子元素最小宽度 */
+    #current-colors {
+        min-width: 200px;
+    }
+    
+    .handle-section {
+        min-width: 150px;
+    }
+    
+    /* 调整内部元素间距 */
+    .color-display-container {
+        flex-direction: row; /* 保持横向排列 */
+        gap: 10px;
+    }
+    
+    /* 调整拉手选择布局 */
+    .handle-selector {
+        flex-direction: row; /* 保持横向排列 */
+        gap: 10px;
+    }
+    
+    /* 调整标题大小 */
+    #current-colors h3,
+    .handle-section h4 {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    
+    /* 调整颜色选项大小 */
+    .color-option {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* 调整拉手图片大小 */
+    .handle-option img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* 系列标题样式 - 确保所有系列标题一致 */
+.series-header {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: left; /* 明确设置为左对齐 */
+    padding-left: 5px; /* 添加少量左边距保持视觉平衡 */
+    display: flex; /* 使用flex布局确保箭头对齐 */
+    justify-content: space-between; /* 文字和箭头分开 */
+    align-items: center; /* 垂直居中 */
+}
+
+/* 移除可能影响特定系列标题居中的样式 */
+.color-series h4 {
+    /* 确保没有其他样式覆盖 */
+    text-align: inherit;
+}

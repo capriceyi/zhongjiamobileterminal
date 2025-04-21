@@ -517,8 +517,8 @@ const accentColorsP248 = ['textures/ZJ-P248-01.webp', 'textures/ZJ-P248-02.webp'
 const accentColorsPS600 = ['textures/ZJ-PS600-01.webp', 'textures/ZJ-PS600-02.webp', 'textures/ZJ-PS600-03.webp', 'textures/ZJ-PS600-04.webp', 'textures/ZJ-PS600-05.webp',
     'textures/ZJ-PS600-06.webp', 'textures/ZJ-PS600-07.webp', 'textures/ZJ-PS600-08.webp', 'textures/ZJ-PS600-16.webp', 'textures/ZJ-PS600-19.webp', 'textures/ZJ-PS600-10.webp', 
     'textures/ZJ-PS600-11.webp', 'textures/ZJ-PS600-14.webp', 'textures/ZJ-PS600-17.webp', 'textures/ZJ-PS600-18.webp'];
-const accentColorsPW00 = ['textures/ZJ-PW001.webp',  'textures/ZJ-PW004.webp',  'textures/ZJ-PW010.webp','textures/ZJ-PW011.webp', 'textures/ZJ-PW012.webp', 'textures/ZJ-PW008.webp', 
-    'textures/ZJ-PW009.webp'];
+const accentColorsPW00 = ['textures/ZJ-PW001.webp',  'textures/ZJ-PW004.webp', , 'textures/ZJ-PW008.webp', 'textures/ZJ-PW009.webp' 'textures/ZJ-PW010.webp','textures/ZJ-PW011.webp', 
+    'textures/ZJ-PW012.webp'];
 const accentColorsNapa = ['textures/24.webp','textures/41.webp','textures/44.webp','textures/45.webp','textures/46.webp','textures/47.webp','textures/49.webp','textures/50.webp',
     'textures/51.webp','textures/52.webp'];
 
